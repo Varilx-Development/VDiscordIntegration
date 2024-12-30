@@ -1,3 +1,4 @@
+![V-Discord-Intergration](https://cdn.modrinth.com/data/cached_images/6eddb7b31cf0eeed5156ae4c6ac961da2f02aa7a_0.webp)
 ![Discord](https://img.shields.io/discord/1322873747535040512)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Varilx-Developement/VDiscordIntegration/build.yml?branch=main)
 ![Release](https://img.shields.io/github/v/release/Varilx-Developement/VDiscordIntegration)
