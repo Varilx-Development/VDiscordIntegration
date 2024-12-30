@@ -1,0 +1,11 @@
+name: VDiscordIntegration
+version: '1.0'
+main: de.varilx.discordIntegration.VDiscordIntegration
+api-version: '1.21'
+authors: [ Dario ]
+description: A DiscordChatbridge, discord -> mc, mc -> discord
+permissions:
+  discord.link:
+    description: Allows the user to link their discord account with their minecraft account
+  discord.reload:
+    description: Allows the user to reload configurations

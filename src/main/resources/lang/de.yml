@@ -1,0 +1,27 @@
+prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # Dieses Präfix kann überall als "<prefix>" verwendet werden
+startup: "<prefix>Die Discord-Integration wurde gestartet!"
+
+chatbridge:
+  join:
+    color: "#00FF00"
+    message: ""
+    title: "<player> ist dem Spiel beigetreten"
+  quit:
+    color: "#FF0000"
+    message: ""
+    title: "<player> hat das Spiel verlassen"
+  startup:
+    color: "#00FF00"
+    message: "Der Server wurde gestartet"
+    title: "Start"                                                # Sie können auch <discordname> verwenden, dies ist jedoch nur verfügbar, wenn Discord verknüpft ist
+  sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
+
+commands:
+  reload:
+    reloaded: "<prefix>Die Konfiguration wurde neu geladen"
+  link:
+    linked: "Du wurdest mit dem Konto <name> verbunden"
+    already-linked: "<prefix><red>Du bist bereits verknüpft und kannst dich nicht erneut verknüpfen"
+    disabled: "<prefix><red>Diese Funktion ist deaktiviert"
+    format: "<prefix>Dieser Befehl existiert nicht, benutze den Befehl /discord link"
+    code-sent: "<prefix>Um dein Discord-Konto zu verknüpfen, sende den folgenden Code an den DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Klicke hier, um zu kopieren><yellow><code></yellow> (klicke zum Kopieren)"

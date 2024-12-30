@@ -1,0 +1,16 @@
+type: Sqlite # Avaiable types: mongo, mysql, sqlite
+
+
+# MONGO
+Mongo:
+  connection-string: "mongodb://<username>:<password>@<host>:<port>/"
+  database: "db"
+
+
+# SQL
+SQL:
+  connection-string: "jdbc:sqlite:plugins/VDiscordIntegration/database.db"
+  username: "username" # Not required for sqlite
+  password: "password" # Not required for sqlite
+
+

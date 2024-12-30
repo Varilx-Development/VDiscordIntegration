@@ -1,0 +1,31 @@
+# Using Minimessage https://docs.advntr.dev/minimessage/format.html
+
+prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # This prefix can be used anywhere as "<prefix>"
+startup: "<prefix>Discord Integration has started up!"
+
+chatbridge:
+  join:
+    color: "#00FF00"
+    message: ""
+    title: "<player> has joined the game"
+  quit:
+    color: "#FF0000"
+    message: ""
+    title: "<player> has left the game"
+  startup:
+    color: "#00FF00"
+    message: "The Server has started"
+    title: "Startup"                                                # You can also use <discordname>, but thats only avaiable if discord is linked
+  sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
+
+
+
+commands:
+  reload:
+    reloaded: "<prefix>The config has been reloaded"
+  link:
+    linked: "You have been connected to the account <name>"
+    already-linked: "<prefix><red>You are already linked, you cant link again"
+    disabled: "<prefix><red>This feature is disabled"
+    format: "<prefix>This command doesnt exists, use the /discord link command"
+    code-sent: "<prefix>To link your discord account, send the follwing code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"

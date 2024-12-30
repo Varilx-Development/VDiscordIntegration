@@ -1,0 +1,24 @@
+language: "en"
+
+chatbridge:
+  type: BOT # Options: BOT (mc -> discord, discord -> mc), WEBHOOK (mc -> discord)
+
+  # This is only necessary if you picked: WEBHOOK
+  webhook:
+    url: "webhook_url"
+    avatar: "some_avatar_url"
+    name: "default_name"
+
+  # This is only necessary if you picked: BOT
+  guild: 1322873747535040512 # The Guild id
+  channel: 1323049958911381515 # Channel id of the synced chat
+  token: ""
+
+
+discord-link: # Only possbile if type is BOT
+  enabled: true
+  enforce: false # If set to true, not linked users won't be able to send messages in the discord chat
+  gets-roles: # These roles will be added to the discord user
+   - 1323067372214419526
+  commands: # These will be executed when they link
+    - "lp user <name> parent set linked"
