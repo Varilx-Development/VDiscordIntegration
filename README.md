@@ -52,27 +52,40 @@ Configure responses for commands like `/discord link` and `/discord reload`.
 language: "en"
 
 chatbridge:
-  type: BOT # Options: BOT (mc -> discord, discord -> mc), WEBHOOK (mc -> discord)
+   type: BOT # Options: BOT (mc -> discord, discord -> mc), WEBHOOK (mc -> discord)
 
-  # This is only necessary if you picked: WEBHOOK
-  webhook:
-    url: "webhook_url"
-    avatar: "some_avatar_url" # Not necessary
-    name: "default_name" # Not necessary
+   # This is only necessary if you picked: WEBHOOK
+   webhook:
+      url: "webhook_url"
+      avatar: "some_avatar_url" # Not necessary
+      name: "ChatBridge" # Not necessary
 
-  # This is only necessary if you picked: BOT
-  guild: 1322873747535040512 # The Guild id
-  channel: 1323049958911381515 # Channel id of the synced chat
-  token: "discord_bot_token"
+   # This is only necessary if you picked: BOT
+   guild: 1322873747535040512 # The Guild id
+   channel: 1323049958911381515 # Channel id of the synced chat
+   token: "discord_bot_token"
 
 
 discord-link: # Only possbile if type is BOT
-  enabled: true
-  enforce: false # If set to true, not linked users won't be able to send messages in the discord chat
-  gets-roles: # These roles will be added to the discord user
-   - 1323067372214419526
-  commands: # These will be executed when they link their discord account
-    - "lp user <name> parent set linked"
+   enabled: true
+   enforce: false # If set to true, not linked users won't be able to send messages in the discord chat
+   gets-roles: # These roles will be added to the discord user, when they link their discord account
+      - 1323067372214419526
+   commands: # These will be executed when they link
+      - "lp user <name> parent set linked"
+
+# Only works if LuckPerms is on the server
+
+
+luckperms:
+   prefix: true # Displays the prefix of the current user in the <name>, of a join, quit and message (e.g. <group> | <name>)
+
+
+role-sync:
+   enabled: true
+   delay: 5000 # Every 30 seconds
+   roles: # Makes links between "minecraft_role":"discord_role_id"
+      admin: 1323313717336608808
 
 ```
 
@@ -81,37 +94,53 @@ discord-link: # Only possbile if type is BOT
 ## Example Message Configuration
 
 ```yaml
-
 # Using Minimessage https://docs.advntr.dev/minimessage/format.html
 
 prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # This prefix can be used anywhere as "<prefix>"
 startup: "<prefix>Discord Integration has started up!"
 
 chatbridge:
-  join:
-    color: "#00FF00"
-    message: ""
-    title: "<player> has joined the game"
-  quit:
-    color: "#FF0000"
-    message: ""
-    title: "<player> has left the game"
-  startup:
-    color: "#00FF00"
-    message: "The Server has started"
-    title: "Startup"                                                # You can also use <name>, but thats only returns the ign
-  sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
+   join:
+      enabled: true
+      color: "#00FF00"
+      message: ""
+      title: "<player> has joined the game"
+      name: "Chatbridge" # The name of the webhook sender defaults to config.yml "chatbridge.webhook.name"
+      avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
+   quit:
+      enable: true
+      color: "#FF0000"
+      message: ""
+      title: "<player> has left the game"
+      name: "Chatbridge" # defaults to config.yml "chatbridge.webhook.name"
+      avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
+   startup:
+      enabled: true
+      color: "#00FF00"
+      message: "The Server has started"
+      title: "Startup"
+   shutdown:
+      enabled: true
+      color: "#FF0000"
+      message: "The Server has stopped"
+      title: "Shutdown"
+   ingame-message: # Ingame -> Discord
+      enabled: true
+      message: "<message>"
+      name: "<name>"  # You can also use <name>, but thats only returns the ign
+   discord-message: # Discord -> Ingame, only with Bot available
+      enabled: true
+      message: "<dark_gray>[<blue><b>Discord</b></blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
 
 commands:
-  reload:
-    reloaded: "<prefix>The config has been reloaded"
-  link:
-    linked: "You have been connected to the account <name>"
-    already-linked: "<prefix><red>You are already linked, you cant link again"
-    disabled: "<prefix><red>This feature is disabled"
-    format: "<prefix>This command doesnt exists, use the /discord link command"
-    code-sent: "<prefix>To link your discord account, send the follwing code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
-
+   reload:
+      reloaded: "<prefix>The config has been reloaded"
+   link:
+      linked: "You have been connected to the account <name>"
+      already-linked: "<prefix><red>You are already linked, you cant link again"
+      disabled: "<prefix><red>This feature is disabled"
+      format: "<prefix>This command doesnt exists, use the /discord link command"
+      code-sent: "<prefix>To link your discord account, send the follwing code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
 ```
 
 ---
