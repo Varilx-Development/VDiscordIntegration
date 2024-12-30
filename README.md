@@ -80,10 +80,10 @@ discord-link: # Only possbile if type is BOT
 luckperms:
    prefix: true # Displays the prefix of the current user in the <name>, of a join, quit and message (e.g. <group> | <name>)
 
-
+# This will give discord users every rank they have ingame also in the discord
 role-sync:
    enabled: true
-   delay: 5000 # Every 30 seconds
+   delay: 30000 # Every 30 seconds
    roles: # Makes links between "minecraft_role":"discord_role_id"
       admin: 1323313717336608808
 
@@ -140,7 +140,7 @@ commands:
       already-linked: "<prefix><red>You are already linked, you cant link again"
       disabled: "<prefix><red>This feature is disabled"
       format: "<prefix>This command doesnt exists, use the /discord link command"
-      code-sent: "<prefix>To link your discord account, send the follwing code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
+      code-sent: "<prefix>To link your discord account, send the following code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
 ```
 
 ---
