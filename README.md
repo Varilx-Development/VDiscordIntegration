@@ -172,3 +172,8 @@ SQL:
 - The MiniMessage format is highly flexible for styling and formatting messages. Refer to the [MiniMessage documentation](https://docs.advntr.dev/minimessage/format.html) for more details.
 - Ensure your Discord bot token and IDs are correctly configured for the BOT mode.
 - SQLite is the simplest database option as it doesn’t require additional setup.
+
+# Support?
+<a href="https://discord.gg/ZPyb9g6Gs4">
+    <img src="https://github.com/user-attachments/assets/e2c942ae-d79a-4606-b4b0-240fd92c9a90" alt="Join our Discord for help" width="400">
+</a>
