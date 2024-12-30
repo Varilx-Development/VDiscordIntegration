@@ -17,7 +17,7 @@ import java.util.UUID;
 public class LinkedUser {
 
     @Id
-    @de.varilx.database.Id
+    @de.varilx.database.id.Id
     Long discordId;
 
     UUID uuid;

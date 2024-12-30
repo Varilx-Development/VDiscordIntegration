@@ -3,8 +3,8 @@ package de.varilx.discordIntegration.commands;
 import com.mojang.brigadier.Command;
 import de.varilx.BaseAPI;
 import de.varilx.config.Configuration;
-import de.varilx.database.Repository;
 import de.varilx.database.Service;
+import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.entity.LinkCode;
 import de.varilx.discordIntegration.entity.LinkedUser;
 import de.varilx.utils.language.LanguageUtils;
@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DiscordCommand {
 
     public DiscordCommand(JavaPlugin plugin, Service database) {
-        Repository<LinkCode, UUID> repo = (Repository<LinkCode, UUID>) database.getRepositoryMap().get(LinkCode.class);
+        Repository<LinkCode, UUID> repo = (Repository<LinkCode, UUID>) database.getRepository(LinkCode.class);
         LifecycleEventManager<Plugin> manager = plugin.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
@@ -56,7 +56,7 @@ public class DiscordCommand {
                                             player.sendMessage(LanguageUtils.getMessage("commands.link.disabled"));
                                             return Command.SINGLE_SUCCESS;
                                         }
-                                        Repository<LinkedUser, Long> userRepo = (Repository<LinkedUser, Long>) database.getRepositoryMap().get(LinkedUser.class);
+                                        Repository<LinkedUser, Long> userRepo = (Repository<LinkedUser, Long>) database.getRepository(LinkedUser.class);
                                         userRepo.findByFieldName("uuid", player.getUniqueId()).thenApply(linkedUser -> {
                                             if (linkedUser != null) {
                                                 player.sendMessage(LanguageUtils.getMessage("commands.link.already-linked"));

@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.1")
 
     // Base API
-    implementation("de.varilx:base-api:0.2.0")
+    implementation("de.varilx:base-api:0.3.2")
 
     // JDA
     implementation("net.dv8tion:JDA:5.2.0")

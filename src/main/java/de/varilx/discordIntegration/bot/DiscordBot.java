@@ -2,8 +2,8 @@ package de.varilx.discordIntegration.bot;
 
 import de.varilx.BaseAPI;
 import de.varilx.config.Configuration;
-import de.varilx.database.Repository;
 import de.varilx.database.Service;
+import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.entity.LinkCode;
 import de.varilx.discordIntegration.entity.LinkedUser;
 import de.varilx.utils.language.LanguageUtils;
@@ -51,8 +51,8 @@ public class DiscordBot extends ListenerAdapter {
         this.configuration = configuration;
         this.databaseService = databaseService;
         this.plugin = plugin;
-        this.linkedUserRepository = (Repository<LinkedUser, Long>) this.databaseService.getRepositoryMap().get(LinkedUser.class);
-        this.linkCodeRepository = (Repository<LinkCode, UUID>) this.databaseService.getRepositoryMap().get(LinkCode.class);
+        this.linkedUserRepository = (Repository<LinkedUser, Long>) this.databaseService.getRepository(LinkedUser.class);
+        this.linkCodeRepository = (Repository<LinkCode, UUID>) this.databaseService.getRepository(LinkCode.class);
 
         JDALogger.setFallbackLoggerEnabled(false);
 

@@ -1,10 +1,9 @@
 package de.varilx.discordIntegration.entity;
 
-import de.varilx.database.Id;
+import de.varilx.database.id.Id;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.bson.types.ObjectId;
 
 import java.util.UUID;
 
