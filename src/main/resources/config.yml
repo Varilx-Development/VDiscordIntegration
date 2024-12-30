@@ -12,7 +12,7 @@ chatbridge:
   # This is only necessary if you picked: BOT
   guild: 1322873747535040512 # The Guild id
   channel: 1323049958911381515 # Channel id of the synced chat
-  token: ""
+  token: "discord_bot_token"
 
 
 discord-link: # Only possbile if type is BOT
