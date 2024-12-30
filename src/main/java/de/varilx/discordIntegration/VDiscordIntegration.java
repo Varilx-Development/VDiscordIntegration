@@ -29,23 +29,6 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Discble Reflections logger
-        try {
-            Reflections.log.getClass();
-            Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
-            unsafeField.setAccessible(true);
-            Unsafe unsafe = (Unsafe) unsafeField.get(null);
-
-            Field field = Reflections.class.getDeclaredField("log");
-
-            Object staticFieldBase = unsafe.staticFieldBase(field);
-
-            long staticFieldOffset = unsafe.staticFieldOffset(field);
-            unsafe.putObject(staticFieldBase, staticFieldOffset, null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
         new BaseAPI(this).enable();
 
         Service service = Service.load(BaseAPI.getBaseAPI().getDatabaseConfiguration().getConfig(), getClassLoader());
