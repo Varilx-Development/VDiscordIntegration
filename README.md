@@ -19,7 +19,7 @@ Define the database type and connection details. The plugin supports:
 ### 2. **Chat Bridge**
 Select the bridge type:
 - **BOT**: Requires a Discord bot token, guild ID, and channel ID.
-- **WEBHOOK**: Requires a webhook URL, name, and avatar.
+- **WEBHOOK**: Requires a webhook URL.
 
 ### 3. **Discord Linking**
 Enable or disable account linking. When enabled, you can enforce linking for chat participation and assign roles or execute commands upon successful linking.
@@ -47,7 +47,7 @@ Configure responses for commands like `/discord link` and `/discord reload`.
 
 ## Example config
 
-```yml
+```yaml
 language: "en"
 
 chatbridge:
@@ -56,8 +56,8 @@ chatbridge:
   # This is only necessary if you picked: WEBHOOK
   webhook:
     url: "webhook_url"
-    avatar: "some_avatar_url"
-    name: "default_name"
+    avatar: "some_avatar_url" # Not necessary
+    name: "default_name" # Not necessary
 
   # This is only necessary if you picked: BOT
   guild: 1322873747535040512 # The Guild id
@@ -74,6 +74,66 @@ discord-link: # Only possbile if type is BOT
     - "lp user <name> parent set linked"
 
 ```
+
+---
+
+## Example Message Configuration
+
+```yaml
+
+# Using Minimessage https://docs.advntr.dev/minimessage/format.html
+
+prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # This prefix can be used anywhere as "<prefix>"
+startup: "<prefix>Discord Integration has started up!"
+
+chatbridge:
+  join:
+    color: "#00FF00"
+    message: ""
+    title: "<player> has joined the game"
+  quit:
+    color: "#FF0000"
+    message: ""
+    title: "<player> has left the game"
+  startup:
+    color: "#00FF00"
+    message: "The Server has started"
+    title: "Startup"                                                # You can also use <discordname>, but thats only avaiable if discord is linked
+  sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
+
+commands:
+  reload:
+    reloaded: "<prefix>The config has been reloaded"
+  link:
+    linked: "You have been connected to the account <name>"
+    already-linked: "<prefix><red>You are already linked, you cant link again"
+    disabled: "<prefix><red>This feature is disabled"
+    format: "<prefix>This command doesnt exists, use the /discord link command"
+    code-sent: "<prefix>To link your discord account, send the follwing code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
+
+```
+
+---
+
+## Example Database Configuration
+
+```yaml
+type: Sqlite # Avaiable types: mongo, mysql, sqlite
+
+
+# MONGO
+Mongo:
+  connection-string: "mongodb://<username>:<password>@<host>:<port>/"
+  database: "db"
+
+
+# SQL
+SQL:
+  connection-string: "jdbc:sqlite:plugins/VDiscordIntegration/database.db"
+  username: "username" # Not required for sqlite
+  password: "password" # Not required for sqlite
+```
+
 
 ---
 

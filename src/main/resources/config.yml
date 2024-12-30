@@ -6,8 +6,8 @@ chatbridge:
   # This is only necessary if you picked: WEBHOOK
   webhook:
     url: "webhook_url"
-    avatar: "some_avatar_url"
-    name: "default_name"
+    avatar: "some_avatar_url" # Not necessary
+    name: "default_name" # Not necessary
 
   # This is only necessary if you picked: BOT
   guild: 1322873747535040512 # The Guild id
