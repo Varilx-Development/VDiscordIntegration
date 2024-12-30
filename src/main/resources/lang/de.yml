@@ -13,7 +13,7 @@ chatbridge:
   startup:
     color: "#00FF00"
     message: "Der Server wurde gestartet"
-    title: "Start"                                                # Sie können auch <discordname> verwenden, dies ist jedoch nur verfügbar, wenn Discord verknüpft ist
+    title: "Start"                                                # Sie können auch <name> verwenden, dies ist jedoch nur der Ingame Name
   sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
 
 commands:

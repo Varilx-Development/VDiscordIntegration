@@ -98,7 +98,7 @@ chatbridge:
   startup:
     color: "#00FF00"
     message: "The Server has started"
-    title: "Startup"                                                # You can also use <discordname>, but thats only avaiable if discord is linked
+    title: "Startup"                                                # You can also use <name>, but thats only returns the ign
   sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
 
 commands:
