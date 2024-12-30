@@ -7,7 +7,7 @@ chatbridge:
   webhook:
     url: "webhook_url"
     avatar: "some_avatar_url" # Not necessary
-    name: "default_name" # Not necessary
+    name: "ChatBridge" # Not necessary
 
   # This is only necessary if you picked: BOT
   guild: 1322873747535040512 # The Guild id
@@ -18,7 +18,20 @@ chatbridge:
 discord-link: # Only possbile if type is BOT
   enabled: true
   enforce: false # If set to true, not linked users won't be able to send messages in the discord chat
-  gets-roles: # These roles will be added to the discord user
+  gets-roles: # These roles will be added to the discord user, when they link their discord account
    - 1323067372214419526
   commands: # These will be executed when they link
     - "lp user <name> parent set linked"
+
+# Only works if LuckPerms is on the server
+
+
+luckperms:
+  prefix: true # Displays the prefix of the current user in the <name>, of a join, quit and message (e.g. <group> | <name>)
+
+
+role-sync:
+  enabled: true
+  delay: 5000 # Every 30 seconds
+  roles: # Makes links between "minecraft_role":"discord_role_id"
+    admin: 1323313717336608808

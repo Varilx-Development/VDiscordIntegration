@@ -1,5 +1,6 @@
 package de.varilx.discordIntegration.entity;
 
+import de.varilx.database.id.MongoId;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,8 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LinkedUser {
 
+    @MongoId
     @Id
-    @de.varilx.database.id.Id
     Long discordId;
 
     UUID uuid;

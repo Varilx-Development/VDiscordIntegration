@@ -5,20 +5,36 @@ startup: "<prefix>Discord Integration has started up!"
 
 chatbridge:
   join:
+    enabled: true
     color: "#00FF00"
     message: ""
     title: "<player> has joined the game"
+    name: "Chatbridge" # The name of the webhook sender defaults to config.yml "chatbridge.webhook.name"
+    avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
   quit:
+    enable: true
     color: "#FF0000"
     message: ""
     title: "<player> has left the game"
+    name: "Chatbridge" # defaults to config.yml "chatbridge.webhook.name"
+    avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
   startup:
+    enabled: true
     color: "#00FF00"
     message: "The Server has started"
-    title: "Startup"                                                 # You can also use <name>, but thats only returns the ign
-  sent-message: "<dark_gray>[<blue><b>Discord</b></dark_blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
-
-
+    title: "Startup"
+  shutdown:
+    enabled: true
+    color: "#FF0000"
+    message: "The Server has stopped"
+    title: "Shutdown"
+  ingame-message: # Ingame -> Discord
+    enabled: true
+    message: "<message>"
+    name: "<name>"  # You can also use <name>, but thats only returns the ign
+  discord-message: # Discord -> Ingame, only with Bot available
+    enabled: true
+    message: "<dark_gray>[<blue><b>Discord</b></blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
 
 commands:
   reload:
