@@ -29,9 +29,9 @@ discord-link: # Only possbile if type is BOT
 luckperms:
   prefix: true # Displays the prefix of the current user in the <name>, of a join, quit and message (e.g. <group> | <name>)
 
-
+# This will give discord users every rank they have ingame also in the discord
 role-sync:
   enabled: true
-  delay: 5000 # Every 30 seconds
+  delay: 30000 # Every 30 seconds
   roles: # Makes links between "minecraft_role":"discord_role_id"
     admin: 1323313717336608808
