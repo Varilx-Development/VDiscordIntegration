@@ -9,3 +9,5 @@ permissions:
     description: Allows the user to link their discord account with their minecraft account
   discord.reload:
     description: Allows the user to reload configurations
+softdepend:
+  - LuckPerms

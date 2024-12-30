@@ -31,10 +31,13 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.1")
 
     // Base API
-    implementation("de.varilx:base-api:0.3.2")
+    implementation("de.varilx:base-api:0.3.7")
 
     // JDA
     implementation("net.dv8tion:JDA:5.2.0")
+
+    // LuckPerms
+    compileOnly("net.luckperms:api:5.4")
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -95,5 +98,8 @@ tasks.named("publishGprPublicationToReposiliteRepository") {
 tasks {
     runServer {
         minecraftVersion("1.21.4")
+        downloadPlugins {
+            url("https://download.luckperms.net/1568/bukkit/loader/LuckPerms-Bukkit-5.4.151.jar")
+        }
     }
 }

@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,16 @@ public class DiscordWebhook {
         this.content.addProperty("username", userName);
     }
 
+    public boolean hasUsername() {
+        return this.content.get("username") != null;
+    }
+
+    public boolean hasAvatar() {
+        return this.content.get("avatar_url") != null;
+    }
+
     public void setAvatarUrl(String avatarUrl) {
+        if (!avatarUrl.startsWith("https://")) return;
         this.content.addProperty("avatar_url", avatarUrl);
     }
 
@@ -56,7 +66,7 @@ public class DiscordWebhook {
             throw new IllegalArgumentException("Url is empty");
         }
 
-        URL url = new URL(this.url);
+        URL url = URI.create(this.url).toURL();
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.addRequestProperty("Content-Type", "application/json");
         connection.addRequestProperty("User-Agent", "Java-DiscordWebhook-BY-Derio");
@@ -234,7 +244,7 @@ public class DiscordWebhook {
 
             object.addProperty("name", name);
             object.addProperty("value", value);
-            object.addProperty("inline",inline);
+            object.addProperty("inline", inline);
 
             return object;
         }
