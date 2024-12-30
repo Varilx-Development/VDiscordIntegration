@@ -1,0 +1,51 @@
+![Discord](https://img.shields.io/discord/1322873747535040512)
+![Build Status](https://img.shields.io/github/actions/workflow/status/Varilx-Developement/VDiscordIntegration/build.yml?branch=main)
+![Release](https://img.shields.io/github/v/release/Varilx-Developement/VDiscordIntegration)
+
+# VDiscord Integration Configuration
+
+A discord chat bridge between minecraft and discord and vice versa
+
+---
+
+
+## Configuration Overview
+
+### 1. **Database**
+Define the database type and connection details. The plugin supports:
+- **MongoDB**: Specify a connection string and database name.
+- **SQL**: Provide a JDBC connection string. (No username/password is required for SQLite.)
+
+### 2. **Chat Bridge**
+Select the bridge type:
+- **BOT**: Requires a Discord bot token, guild ID, and channel ID.
+- **WEBHOOK**: Requires a webhook URL, name, and avatar.
+
+### 3. **Discord Linking**
+Enable or disable account linking. When enabled, you can enforce linking for chat participation and assign roles or execute commands upon successful linking.
+
+### 4. **Custom Messages**
+Customize messages for server startup, player join/quit, and Discord chat using the MiniMessage format.
+
+### 5. **Commands**
+Configure responses for commands like `/discord link` and `/discord reload`.
+
+---
+
+## Setup Instructions
+
+1. Download and install the plugin on your Minecraft server.
+2. Configure the `config.yml` file with your preferred settings:
+    - Set the database type and connection details.
+    - Configure the chat bridge (BOT or WEBHOOK).
+    - Enable and customize account linking if needed.
+    - Define custom messages using MiniMessage.
+3. Restart the server to apply the changes.
+
+---
+
+## Notes
+
+- The MiniMessage format is highly flexible for styling and formatting messages. Refer to the [MiniMessage documentation](https://docs.advntr.dev/minimessage/format.html) for more details.
+- Ensure your Discord bot token and IDs are correctly configured for the BOT mode.
+- SQLite is the simplest database option as it doesn’t require additional setup.
