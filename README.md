@@ -26,6 +26,7 @@ Enable or disable account linking. When enabled, you can enforce linking for cha
 
 ### 4. **Custom Messages**
 Customize messages for server startup, player join/quit, and Discord chat using the MiniMessage format.
+We currently support: `de` and `en`
 
 ### 5. **Commands**
 Configure responses for commands like `/discord link` and `/discord reload`.
