@@ -42,8 +42,9 @@ jobs:
           echo "Setting version to $FULL_VERSION"
           sed -i "s/^project_version = .*/project_version = $FULL_VERSION/" gradle.properties
           echo "FULL_VERSION=$FULL_VERSION" >> $GITHUB_ENV
-      - name: Publish
-        run: ./gradlew publish --no-daemon --stacktrace
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+#      - name: Publish
+#        run: ./gradlew publish --no-daemon --stacktrace
       - name: Build Jar
         run: |
           ./gradlew clean
@@ -68,8 +69,9 @@ jobs:
           ./modrinth-cli upload \
             --project-id ${{secrets.PROJECT_ID}} \
             --file ${{env.JAR_FILE}} \
-            --version-name "${{env.FULL_VERSION}}" \
-            --version-number "${{env.FULL_VERSION}}" \
+            --version-name "${{env.VERSION}}" \
+            --version-number "${{env.VERSION}}" \
             --version-type ${{ env.version_type }} \
             --game-versions "1.21.x" \
             --loaders "paper,purpur"
+            --changelog "${{ github.event.release.body }}"
