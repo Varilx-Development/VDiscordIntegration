@@ -63,15 +63,16 @@ jobs:
       - name: Install Modrinth CLI
         run: curl -sSL https://modrinth.github.io/cli/install.sh | bash
       - name: Upload to Modrinth
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        run: |
-          ./modrinth-cli upload \
-            --project-id ${{ secrets.PROJECT_ID }} \
-            --file "$JAR_FILE" \
-            --version-name "$VERSION" \
-            --version-number "$VERSION" \
-            --version-type "$VERSION_TYPE" \
-            --game-versions "1.21.x" \
-            --loaders "paper,purpur" \
-            --changelog "${{ github.event.release.body }}"
+        uses: RubixDev/modrinth-upload@v1
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          file_path: ${{ env.JAR_FILE }}
+          name: ${{ env.VERSION }}
+          version: ${{ env.VERSION }}
+          changelog: ${{ github.event.release.body }}
+          relations: P7dR8mSH:required
+          game_versions: 1.19,1.19.1,1.19.2
+          release_type: ${{ env.VERSION_TYPE }}
+          loaders: paper,purpur
+          featured: true
+          project_id: ${{ secrets.PROJECT_VERSION }}
