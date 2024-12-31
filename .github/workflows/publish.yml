@@ -57,6 +57,7 @@ jobs:
         run: |
           echo "File size: $(stat -c %s $JAR_FILE) bytes"
           echo "${{ github.event.release.upload_url }}"
+          echo $(basename "$JAR_FILE")
           UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=$(basename "$JAR_FILE")"
 
 
