@@ -58,8 +58,8 @@ jobs:
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/java-archive" \
-            --data-binary @"${env.JAR_FILE}" \
-            "${{ github.event.release.upload_url }}?name=$(basename "${env.JAR_FILE}")"
+            --data-binary @"$JAR_FILE" \
+            "${{ github.event.release.upload_url }}?name=$(basename "$JAR_FILE")"
       - name: Install Modrinth CLI
         run: curl -sSL https://modrinth.github.io/cli/install.sh | bash
       - name: Upload to Modrinth
@@ -67,11 +67,11 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
           ./modrinth-cli upload \
-            --project-id ${{secrets.PROJECT_ID}} \
-            --file ${{env.JAR_FILE}} \
-            --version-name "${{env.VERSION}}" \
-            --version-number "${{env.VERSION}}" \
-            --version-type ${{ env.version_type }} \
+            --project-id ${{ secrets.PROJECT_ID }} \
+            --file "$JAR_FILE" \
+            --version-name "$VERSION" \
+            --version-number "$VERSION" \
+            --version-type "$VERSION_TYPE" \
             --game-versions "1.21.x" \
-            --loaders "paper,purpur"
+            --loaders "paper,purpur" \
             --changelog "${{ github.event.release.body }}"
