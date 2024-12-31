@@ -60,8 +60,6 @@ jobs:
             -H "Content-Type: application/java-archive" \
             --data-binary @"$JAR_FILE" \
             "${{ github.event.release.upload_url }}?name=$(basename "$JAR_FILE")"
-      - name: Install Modrinth CLI
-        run: curl -sSL https://modrinth.github.io/cli/install.sh | bash
       - name: Upload to Modrinth
         uses: RubixDev/modrinth-upload@v1
         with:
