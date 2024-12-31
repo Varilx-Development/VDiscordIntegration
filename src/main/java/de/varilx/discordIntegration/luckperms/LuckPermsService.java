@@ -6,6 +6,7 @@ import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.discord.DiscordBot;
 import de.varilx.discordIntegration.discord.DiscordHandler;
 import de.varilx.discordIntegration.entity.LinkedUser;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -15,11 +16,13 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedDataManager;
 import net.luckperms.api.cacheddata.CachedMetaData;
+import net.luckperms.api.model.data.DataMutateResult;
 import net.luckperms.api.model.data.NodeMap;
 import net.luckperms.api.model.group.Group;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.node.NodeType;
+import net.luckperms.api.node.types.InheritanceNode;
 import net.luckperms.api.node.types.MetaNode;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.query.QueryMode;
@@ -63,14 +66,29 @@ public class LuckPermsService implements LuckPermsServiceAPI {
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             YamlConfiguration config = BaseAPI.getBaseAPI().getConfiguration().getConfig();
             if (config.getBoolean("role-sync.enabled") && discordHandler instanceof DiscordBot bot) {
-                plugin.getLogger().info("Running role sync");
                 ((Repository<LinkedUser, Long>) database.getRepository(LinkedUser.class)).findAll().thenAccept(users -> {
                     for (LinkedUser user : users) {
                         net.dv8tion.jda.api.entities.User discordUser = bot.getJda().retrieveUserById(user.getDiscordId()).complete();
                         if (!bot.getGuild().isMember(discordUser)) continue;
+                        Member member = bot.getGuild().getMember(discordUser);
 
-                        for (String roleName : config.getConfigurationSection("role-sync.roles").getKeys(false)) {
-                            Role roleById = bot.getGuild().getRoleById(config.getString("role-sync.roles." + roleName));
+                        for (String roleId : config.getConfigurationSection("role-sync.discord").getKeys(false)) {
+                            Role roleById = bot.getGuild().getRoleById(roleId);
+                            if (roleById == null) {
+                                plugin.getLogger().warning("The discord role of " + roleId + " doesnt exists");
+                                continue;
+                            }
+                            Group group = getGroupByName(config.getString("role-sync.discord." + roleId));
+                            if (member.getRoles().contains(roleById)) {
+                                if (hasGroup(user.getUuid(), group)) continue;
+                                addGroup(user.getUuid(), group);
+                            } else {
+                                if (!hasGroup(user.getUuid(), group)) continue;
+                                removeGroup(user.getUuid(), group);
+                            }
+                        }
+                        for (String roleName : config.getConfigurationSection("role-sync.luckperms").getKeys(false)) {
+                            Role roleById = bot.getGuild().getRoleById(config.getString("role-sync.luckperms." + roleName));
                             if (roleById == null) {
                                 plugin.getLogger().warning("The discord role of " + roleName + " doesnt exists");
                                 continue;
@@ -97,6 +115,21 @@ public class LuckPermsService implements LuckPermsServiceAPI {
             String prefix = getGroupPrefixById(player.getUniqueId());
             if (prefix == null) return player.getName();
             return prefix + " | " + player.getName();
+        });
+    }
+
+    public void addGroup(UUID uuid, Group group) {
+        getUserByIdAsync(uuid).thenAcceptAsync(user -> {
+            InheritanceNode node = InheritanceNode.builder(group).value(true).build();
+            DataMutateResult result = user.data().add(node);
+            luckPerms.getUserManager().saveUser(user);
+        });
+    }
+    public void removeGroup(UUID uuid, Group group) {
+        getUserByIdAsync(uuid).thenAcceptAsync(user -> {
+            InheritanceNode node = InheritanceNode.builder(group).value(true).build();
+            DataMutateResult result = user.data().remove(node);
+            luckPerms.getUserManager().saveUser(user);
         });
     }
 

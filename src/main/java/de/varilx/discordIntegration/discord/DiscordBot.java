@@ -65,7 +65,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
         this.linkedUserRepository = (Repository<LinkedUser, Long>) this.databaseService.getRepository(LinkedUser.class);
         this.linkCodeRepository = (Repository<LinkCode, UUID>) this.databaseService.getRepository(LinkCode.class);
 
-        if (configuration.getConfig().getString("chatbridge.token") == null) {
+        if (configuration.getConfig().getString("chatbridge.token").equalsIgnoreCase("discord_bot_token")) {
             plugin.getLogger().severe("No discord bot token provided, disabling...");
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;

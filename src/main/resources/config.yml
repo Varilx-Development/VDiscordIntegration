@@ -33,5 +33,7 @@ luckperms:
 role-sync:
   enabled: true
   delay: 30000 # Every 30 seconds
-  roles: # Makes links between "minecraft_role":"discord_role_id"
-    admin: 1323313717336608808
+  luckperms: # This will give the discord users every minecraft role (e.g. admin will grant a role with the id 1323313717336608808)
+    user: 1323067372214419526
+  discord: # This will give the minecraft user every discord role specified here
+    1323021184656478261: admin
