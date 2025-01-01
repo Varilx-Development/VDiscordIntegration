@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     // PaperMC API
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${project.property("paper_version")}")
 
     // Lombok
     implementation("org.projectlombok:lombok:1.18.36")
