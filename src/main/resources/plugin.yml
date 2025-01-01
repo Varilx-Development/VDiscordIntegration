@@ -1,5 +1,5 @@
 name: VDiscordIntegration
-version: '1.0'
+version: '${version}'
 main: de.varilx.discordIntegration.VDiscordIntegration
 api-version: '1.21'
 authors: [ Dario ]
