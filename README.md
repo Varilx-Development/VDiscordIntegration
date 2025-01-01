@@ -16,7 +16,9 @@ A discord chat bridge between minecraft and discord.
 
 ## Preview
 
-![preview](https://cdn.modrinth.com/data/dff6O7s8/images/e02e62cd902580828c28580e0e8b571e97e81a09.gif)
+![preview_ingame](https://github.com/user-attachments/assets/29662231-e8b8-4e93-a178-73dbf3b7d3ed)
+![preview_discord](https://github.com/user-attachments/assets/5aace62e-ecb9-429c-80fa-365d652d2496)
+
 
 ## Configuration Overview
 
