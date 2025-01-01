@@ -1,13 +1,23 @@
+![V-Discord-Intergration](https://cdn.modrinth.com/data/cached_images/6eddb7b31cf0eeed5156ae4c6ac961da2f02aa7a_0.webp)
 ![Discord](https://img.shields.io/discord/1322873747535040512)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Varilx-Development/VDiscordIntegration/build.yml?branch=main)
 ![Release](https://img.shields.io/github/v/release/Varilx-Development/VDiscordIntegration)
-![V-Discord-Intergration](https://cdn.modrinth.com/data/cached_images/6eddb7b31cf0eeed5156ae4c6ac961da2f02aa7a_0.webp)
+<p align="center">
+    <a href="https://modrinth.com/plugin/vdiscord-intergration">
+        <img src="https://raw.githubusercontent.com/vLuckyyy/badges/main/avaiable-on-modrinth.svg" alt="Available on Modrinth" />
+    </a>
+</p>
 
-# VDiscord Integration Configuration
+# V-Discord Intergration | Simple Discord Chatbridge
 
-A discord chat bridge between minecraft and discord and vice versa
+A discord chat bridge between minecraft and discord.
 
 ---
+
+## Preview
+
+![preview_ingame](https://github.com/user-attachments/assets/29662231-e8b8-4e93-a178-73dbf3b7d3ed)
+![preview_discord](https://github.com/user-attachments/assets/5aace62e-ecb9-429c-80fa-365d652d2496)
 
 
 ## Configuration Overview
@@ -31,6 +41,16 @@ We currently support: `de` and `en`
 
 ### 5. **Commands**
 Configure responses for commands like `/discord link` and `/discord reload`.
+
+### 6. **Permissions**
+`discord.link`
+
+Allows the user to link their discord account with their minecraft account.
+
+
+`discord.reload`
+
+Allows the user to reload configurations.
 
 ---
 
@@ -94,6 +114,7 @@ role-sync:
 ## Example Message Configuration
 
 ```yaml
+
 # Using Minimessage https://docs.advntr.dev/minimessage/format.html
 
 prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # This prefix can be used anywhere as "<prefix>"
@@ -141,6 +162,7 @@ commands:
       disabled: "<prefix><red>This feature is disabled"
       format: "<prefix>This command doesnt exists, use the /discord link command"
       code-sent: "<prefix>To link your discord account, send the following code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
+
 ```
 
 ---

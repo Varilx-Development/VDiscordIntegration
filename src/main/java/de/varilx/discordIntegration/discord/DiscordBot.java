@@ -120,6 +120,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
         if (!event.getChannel().getType().isGuild() || !event.getChannel().getType().isMessage()) return;
         if (event.getAuthor().isBot()) return;
+        if (!event.getChannel().getId().equalsIgnoreCase(configuration.getConfig().getString("chatbridge.channel"))) return;
         if (!LanguageUtils.getMessageString("chatbridge.discord-message.enabled").equalsIgnoreCase("true")) return;
         this.linkedUserRepository.findFirstById(event.getAuthor().getIdLong()).thenAcceptAsync(user -> {
             if (user == null && BaseAPI.getBaseAPI().getConfiguration().getConfig().getBoolean("discord-link.enforce")) {

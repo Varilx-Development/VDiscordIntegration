@@ -38,7 +38,7 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new BaseAPI(this).enable();
+        new BaseAPI(this, 24308).enable();
 
         Service service = Service.load(BaseAPI.getBaseAPI().getDatabaseConfiguration().getConfig(), getClassLoader());
 
