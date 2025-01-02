@@ -1,13 +1,12 @@
 package de.varilx.discordIntegration.discord;
 
 import de.varilx.BaseAPI;
-import de.varilx.config.Configuration;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.VDiscordIntegration;
 import de.varilx.discordIntegration.entity.LinkCode;
 import de.varilx.discordIntegration.entity.LinkedUser;
-import de.varilx.discordIntegration.webhook.DiscordWebhook;
 import de.varilx.utils.language.LanguageUtils;
 import lombok.Getter;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -26,7 +25,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -45,7 +43,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
     @Getter
     private JDA jda;
-    private final Configuration configuration;
+    private final VaxConfiguration configuration;
     private final Service databaseService;
     private final Repository<LinkedUser, Long> linkedUserRepository;
     private final Repository<LinkCode, UUID> linkCodeRepository;
@@ -58,7 +56,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
     private TextChannel channel;
 
 
-    public DiscordBot(VDiscordIntegration plugin, Configuration configuration, Service databaseService) {
+    public DiscordBot(VDiscordIntegration plugin, VaxConfiguration configuration, Service databaseService) {
         this.configuration = configuration;
         this.databaseService = databaseService;
         this.plugin = plugin;

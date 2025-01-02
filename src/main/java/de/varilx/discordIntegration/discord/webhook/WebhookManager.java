@@ -1,7 +1,7 @@
 package de.varilx.discordIntegration.discord.webhook;
 
 import de.varilx.BaseAPI;
-import de.varilx.config.Configuration;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.discordIntegration.VDiscordIntegration;
 import de.varilx.discordIntegration.discord.DiscordHandler;
 import de.varilx.discordIntegration.webhook.DiscordWebhook;
@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class WebhookManager implements DiscordHandler {
 
-    private final Configuration configuration;
+    private final VaxConfiguration configuration;
     private final VDiscordIntegration plugin;
 
     public WebhookManager(VDiscordIntegration plugin) {

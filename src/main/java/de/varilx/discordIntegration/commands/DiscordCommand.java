@@ -2,7 +2,7 @@ package de.varilx.discordIntegration.commands;
 
 import com.mojang.brigadier.Command;
 import de.varilx.BaseAPI;
-import de.varilx.config.Configuration;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.entity.LinkCode;
@@ -41,7 +41,7 @@ public class DiscordCommand {
                                         CompletableFuture.runAsync(() -> {
                                             BaseAPI.getBaseAPI().getConfiguration().reload();
                                             BaseAPI.getBaseAPI().getDatabaseConfiguration().reload();
-                                            BaseAPI.getBaseAPI().getLanguageConfigurations().values().forEach(Configuration::reload);
+                                            BaseAPI.getBaseAPI().getLanguageConfigurations().values().forEach(VaxConfiguration::reload);
                                             context.getSource().getSender().sendMessage(LanguageUtils.getMessage("commands.reload.reloaded"));
                                         });
                                         return 1;

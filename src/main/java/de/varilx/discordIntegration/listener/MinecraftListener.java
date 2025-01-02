@@ -1,13 +1,11 @@
 package de.varilx.discordIntegration.listener;
 
 import de.varilx.BaseAPI;
-import de.varilx.discordIntegration.discord.DiscordBot;
+import de.varilx.configuration.VaxConfiguration;
+import de.varilx.configuration.file.YamlConfiguration;
 import de.varilx.discordIntegration.discord.DiscordHandler;
-import de.varilx.discordIntegration.discord.webhook.WebhookManager;
 import de.varilx.utils.language.LanguageUtils;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -17,13 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class MinecraftListener implements Listener {
 
-    private final YamlConfiguration configuration;
 
     private final DiscordHandler manager;
 
     public MinecraftListener(DiscordHandler manager) {
         this.manager = manager;
-        this.configuration = BaseAPI.getBaseAPI().getConfiguration().getConfig();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
