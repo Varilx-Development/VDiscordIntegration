@@ -31,10 +31,10 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.1")
 
     // Base API
-    implementation("de.varilx:base-api:0.4.1")
+    implementation("de.varilx:base-api:0.4.3")
 
     // JDA
-    implementation("net.dv8tion:JDA:5.2.0")
+    implementation("net.dv8tion:JDA:5.2.2")
 
     // LuckPerms
     compileOnly("net.luckperms:api:5.4")
