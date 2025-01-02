@@ -1,6 +1,7 @@
 package de.varilx.discordIntegration.listener;
 
 import de.varilx.BaseAPI;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.discordIntegration.discord.DiscordBot;
 import de.varilx.discordIntegration.discord.DiscordHandler;
 import de.varilx.discordIntegration.discord.webhook.WebhookManager;
@@ -17,13 +18,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class MinecraftListener implements Listener {
 
-    private final YamlConfiguration configuration;
+    private final VaxConfiguration configuration;
 
     private final DiscordHandler manager;
 
     public MinecraftListener(DiscordHandler manager) {
         this.manager = manager;
-        this.configuration = BaseAPI.getBaseAPI().getConfiguration().getConfig();
+        this.configuration = BaseAPI.get().getConfiguration();
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
