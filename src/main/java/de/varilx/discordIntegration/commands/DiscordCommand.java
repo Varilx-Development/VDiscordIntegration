@@ -2,7 +2,7 @@ package de.varilx.discordIntegration.commands;
 
 import com.mojang.brigadier.Command;
 import de.varilx.BaseAPI;
-import de.varilx.config.Configuration;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.entity.LinkCode;
@@ -39,9 +39,9 @@ public class DiscordCommand {
                                     .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("discord.reload"))
                                     .executes(context -> {
                                         CompletableFuture.runAsync(() -> {
-                                            BaseAPI.getBaseAPI().getConfiguration().reload();
-                                            BaseAPI.getBaseAPI().getDatabaseConfiguration().reload();
-                                            BaseAPI.getBaseAPI().getLanguageConfigurations().values().forEach(Configuration::reload);
+                                            BaseAPI.get().getConfiguration().reload();
+                                            BaseAPI.get().getDatabaseConfiguration().reload();
+                                            BaseAPI.get().getCurrentLanguageConfiguration().reload();
                                             context.getSource().getSender().sendMessage(LanguageUtils.getMessage("commands.reload.reloaded"));
                                         });
                                         return 1;
@@ -52,7 +52,7 @@ public class DiscordCommand {
                                     .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("discord.link"))
                                     .executes(context -> {
                                         Player player = (Player) context.getSource().getSender();
-                                        if (!BaseAPI.getBaseAPI().getConfiguration().getConfig().getBoolean("discord-link.enabled")) {
+                                        if (!BaseAPI.get().getConfiguration().getBoolean("discord-link.enabled")) {
                                             player.sendMessage(LanguageUtils.getMessage("commands.link.disabled"));
                                             return Command.SINGLE_SUCCESS;
                                         }

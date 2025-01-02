@@ -1,7 +1,7 @@
 package de.varilx.discordIntegration.discord;
 
 import de.varilx.BaseAPI;
-import de.varilx.config.Configuration;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.VDiscordIntegration;
@@ -45,7 +45,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
     @Getter
     private JDA jda;
-    private final Configuration configuration;
+    private final VaxConfiguration configuration;
     private final Service databaseService;
     private final Repository<LinkedUser, Long> linkedUserRepository;
     private final Repository<LinkCode, UUID> linkCodeRepository;
@@ -58,14 +58,14 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
     private TextChannel channel;
 
 
-    public DiscordBot(VDiscordIntegration plugin, Configuration configuration, Service databaseService) {
+    public DiscordBot(VDiscordIntegration plugin, VaxConfiguration configuration, Service databaseService) {
         this.configuration = configuration;
         this.databaseService = databaseService;
         this.plugin = plugin;
         this.linkedUserRepository = (Repository<LinkedUser, Long>) this.databaseService.getRepository(LinkedUser.class);
         this.linkCodeRepository = (Repository<LinkCode, UUID>) this.databaseService.getRepository(LinkCode.class);
 
-        if (configuration.getConfig().getString("chatbridge.token").equalsIgnoreCase("discord_bot_token")) {
+        if (configuration.getString("chatbridge.token").equalsIgnoreCase("discord_bot_token")) {
             plugin.getLogger().severe("No discord bot token provided, disabling...");
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
@@ -74,7 +74,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
         JDALogger.setFallbackLoggerEnabled(false);
 
         JDABuilder jdaBuilder = JDABuilder
-                .create(configuration.getConfig().getString("chatbridge.token"), EnumSet.of(GUILD_MEMBERS, GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES));
+                .create(configuration.getString("chatbridge.token"), EnumSet.of(GUILD_MEMBERS, GUILD_MESSAGES, MESSAGE_CONTENT, DIRECT_MESSAGES));
         this.jda = jdaBuilder
                 .setStatus(OnlineStatus.ONLINE)
                 .addEventListeners(this)
@@ -90,8 +90,8 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        this.guild = Optional.ofNullable(jda.getGuildById(configuration.getConfig().getString("chatbridge.guild"))).orElse(this.jda.getGuilds().getFirst());
-        this.channel = this.guild.getTextChannelById(configuration.getConfig().getString("chatbridge.channel"));
+        this.guild = Optional.ofNullable(jda.getGuildById(configuration.getString("chatbridge.guild"))).orElse(this.jda.getGuilds().getFirst());
+        this.channel = this.guild.getTextChannelById(configuration.getString("chatbridge.channel"));
 
         this.manageLifecyle("startup");
     }
@@ -99,15 +99,15 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         if (!event.getChannel().getType().isGuild()) {
-            if (!configuration.getConfig().getBoolean("discord-link.enabled")) return;
+            if (!configuration.getBoolean("discord-link.enabled")) return;
             this.linkCodeRepository.findByFieldName("code", event.getMessage().getContentRaw()).thenAccept(linkCode -> {
                 if (linkCode == null) return;
                 event.getMessage().reply(LanguageUtils.getMessageString("commands.link.linked").replace("<name>", linkCode.getUsername())).queue();
 
-                for (String command : BaseAPI.getBaseAPI().getConfiguration().getConfig().getStringList("discord-link.commands")) {
+                for (String command : BaseAPI.get().getConfiguration().getStringList("discord-link.commands")) {
                     Bukkit.getScheduler().runTask(this.plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("<name>", linkCode.getUsername())));
                 }
-                for (String roleId : BaseAPI.getBaseAPI().getConfiguration().getConfig().getStringList("discord-link.gets-roles")) {
+                for (String roleId : BaseAPI.get().getConfiguration().getStringList("discord-link.gets-roles")) {
                     this.guild.addRoleToMember(event.getAuthor(), this.guild.getRoleById(roleId)).queue();
                 }
 
@@ -120,10 +120,10 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
         if (!event.getChannel().getType().isGuild() || !event.getChannel().getType().isMessage()) return;
         if (event.getAuthor().isBot()) return;
-        if (!event.getChannel().getId().equalsIgnoreCase(configuration.getConfig().getString("chatbridge.channel"))) return;
+        if (!event.getChannel().getId().equalsIgnoreCase(configuration.getString("chatbridge.channel"))) return;
         if (!LanguageUtils.getMessageString("chatbridge.discord-message.enabled").equalsIgnoreCase("true")) return;
         this.linkedUserRepository.findFirstById(event.getAuthor().getIdLong()).thenAcceptAsync(user -> {
-            if (user == null && BaseAPI.getBaseAPI().getConfiguration().getConfig().getBoolean("discord-link.enforce")) {
+            if (user == null && BaseAPI.get().getConfiguration().getBoolean("discord-link.enforce")) {
                 return;
             }
             Bukkit.getScheduler().runTask(plugin, () -> {
@@ -173,7 +173,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
     @Override
     public void manageLifecyle(String type) {
-        if (!configuration.getConfig().getString("chatbridge.type").equalsIgnoreCase("bot")) return;
+        if (!configuration.getString("chatbridge.type").equalsIgnoreCase("bot")) return;
         if (!LanguageUtils.getMessageString("chatbridge." + type + ".enabled").equalsIgnoreCase("true")) return;
         this.channel.sendMessageEmbeds(new EmbedBuilder()
                 .setDescription(LanguageUtils.getMessageString("chatbridge." + type + ".message"))

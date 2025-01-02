@@ -1,6 +1,7 @@
 package de.varilx.discordIntegration.luckperms;
 
 import de.varilx.BaseAPI;
+import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.discord.DiscordBot;
@@ -59,12 +60,12 @@ public class LuckPermsService implements LuckPermsServiceAPI {
         this.discordHandler = discordHandler;
         this.luckPerms = LuckPermsProvider.get();
 
-        this.syncRoles((int) (BaseAPI.getBaseAPI().getConfiguration().getConfig().getInt("role-sync.delay") * 0.02));
+        this.syncRoles((int) (BaseAPI.get().getConfiguration().getInt("role-sync.delay") * 0.02));
     }
 
     private void syncRoles(int delay) {
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
-            YamlConfiguration config = BaseAPI.getBaseAPI().getConfiguration().getConfig();
+            VaxConfiguration config = BaseAPI.get().getConfiguration();
             if (config.getBoolean("role-sync.enabled") && discordHandler instanceof DiscordBot bot) {
                 ((Repository<LinkedUser, Long>) database.getRepository(LinkedUser.class)).findAll().thenAccept(users -> {
                     for (LinkedUser user : users) {
@@ -111,7 +112,7 @@ public class LuckPermsService implements LuckPermsServiceAPI {
     @Override
     public CompletableFuture<String> getDisplayName(Player player) {
         return CompletableFuture.supplyAsync(() -> {
-            if (!BaseAPI.getBaseAPI().getConfiguration().getConfig().getBoolean("luckperms.prefix")) return player.getName();
+            if (!BaseAPI.get().getConfiguration().getBoolean("luckperms.prefix")) return player.getName();
             String prefix = getGroupPrefixById(player.getUniqueId());
             if (prefix == null) return player.getName();
             return prefix + " | " + player.getName();

@@ -1,6 +1,9 @@
 package de.varilx.discordIntegration;
 
 import de.varilx.BaseAPI;
+import de.varilx.BaseSpigotAPI;
+import de.varilx.configuration.VaxConfiguration;
+import de.varilx.configuration.file.YamlConfiguration;
 import de.varilx.database.Service;
 import de.varilx.discordIntegration.discord.DiscordBot;
 import de.varilx.discordIntegration.commands.DiscordCommand;
@@ -15,7 +18,6 @@ import de.varilx.discordIntegration.webhook.DiscordWebhook;
 import de.varilx.utils.language.LanguageUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,17 +40,17 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new BaseAPI(this, 24308).enable();
+        new BaseSpigotAPI(this, 24308).enable();
 
-        Service service = Service.load(BaseAPI.getBaseAPI().getDatabaseConfiguration().getConfig(), getClassLoader());
+        Service service = Service.load(BaseAPI.get().getDatabaseConfiguration(), getClassLoader());
 
         service.create(LinkedUser.class, Long.class);
         service.create(LinkCode.class, UUID.class);
 
-        YamlConfiguration config = BaseAPI.getBaseAPI().getConfiguration().getConfig();
+        VaxConfiguration config = BaseAPI.get().getConfiguration();
 
         this.manager = switch (config.getString("chatbridge.type").toLowerCase()) {
-            case "bot" -> new DiscordBot(this, BaseAPI.getBaseAPI().getConfiguration(), service);
+            case "bot" -> new DiscordBot(this, BaseAPI.get().getConfiguration(), service);
             default -> new WebhookManager(this);
         };
 
