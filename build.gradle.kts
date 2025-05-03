@@ -34,7 +34,7 @@ dependencies {
     implementation("de.varilx:base-api:1.1.0")
 
     // JDA
-    implementation("net.dv8tion:JDA:5.2.2")
+    implementation("net.dv8tion:JDA:5.5.1")
 
     // LuckPerms
     compileOnly("net.luckperms:api:5.4")
