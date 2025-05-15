@@ -11,6 +11,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bson.types.ObjectId;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -68,7 +69,7 @@ public class DiscordCommand {
                                             long code = ThreadLocalRandom.current().nextLong(99999);
                                             repo.findFirstById(player.getUniqueId()).thenAccept(linkCode -> {
                                                 if (linkCode == null) {
-                                                    linkCode = new LinkCode(player.getUniqueId(), code, player.getName(), System.currentTimeMillis());
+                                                    linkCode = new LinkCode(UUID.randomUUID(), player.getUniqueId(), code, player.getName(), System.currentTimeMillis());
                                                     repo.insert(linkCode);
                                                 }
                                                 player.sendMessage(LanguageUtils.getMessage("commands.link.code-sent", Placeholder.parsed("code", String.valueOf(linkCode.getCode()))));

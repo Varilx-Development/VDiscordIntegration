@@ -23,18 +23,18 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${project.property("paper_version")}")
 
     // Lombok
-    implementation("org.projectlombok:lombok:1.18.36")
-    annotationProcessor("org.projectlombok:lombok:1.18.36")
-    compileOnly("org.projectlombok:lombok:1.18.36")
+    implementation("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    compileOnly("org.projectlombok:lombok:1.18.38")
 
     // JetBrains Annotations
-    implementation("org.jetbrains:annotations:26.0.1")
+    implementation("org.jetbrains:annotations:26.0.2")
 
     // Base API
     implementation("de.varilx:base-api:1.1.1")
 
     // JDA
-    implementation("net.dv8tion:JDA:5.2.2")
+    implementation("net.dv8tion:JDA:5.5.1")
 
     // LuckPerms
     compileOnly("net.luckperms:api:5.4")

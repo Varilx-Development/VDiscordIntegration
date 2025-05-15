@@ -7,7 +7,6 @@ import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.VDiscordIntegration;
 import de.varilx.discordIntegration.entity.LinkCode;
 import de.varilx.discordIntegration.entity.LinkedUser;
-import de.varilx.discordIntegration.webhook.DiscordWebhook;
 import de.varilx.utils.language.LanguageUtils;
 import lombok.Getter;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -26,7 +25,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -40,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import static net.dv8tion.jda.api.requests.GatewayIntent.*;
+import static org.apache.commons.lang3.math.NumberUtils.toLong;
 
 public class DiscordBot extends ListenerAdapter implements DiscordHandler {
 
@@ -99,8 +98,11 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         if (!event.getChannel().getType().isGuild()) {
+            System.out.println(event.getMessage().getContentRaw());
             if (!configuration.getBoolean("discord-link.enabled")) return;
-            this.linkCodeRepository.findByFieldName("code", event.getMessage().getContentRaw()).thenAccept(linkCode -> {
+            System.out.println(linkCodeRepository.findAll().join());
+            this.linkCodeRepository.findByFieldName("code", toLong(event.getMessage().getContentRaw())).thenAccept(linkCode -> {
+                System.out.println(linkCode);
                 if (linkCode == null) return;
                 event.getMessage().reply(LanguageUtils.getMessageString("commands.link.linked").replace("<name>", linkCode.getUsername())).queue();
 
@@ -112,8 +114,8 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
                 }
 
 
-                this.linkCodeRepository.deleteById(linkCode.getLink());
-                this.linkedUserRepository.insert(new LinkedUser(event.getAuthor().getIdLong(), linkCode.getLink(), linkCode.getUsername()));
+                this.linkCodeRepository.deleteById(linkCode.get_id());
+                this.linkedUserRepository.insert(new LinkedUser(UUID.randomUUID(), event.getAuthor().getIdLong(), linkCode.get_id(), linkCode.getUsername()));
             });
             return;
         }
@@ -135,6 +137,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
             });
         });
     }
+
     @Override
     public void sendMessage(Player player, Component message) {
         CompletableFuture.runAsync(() -> {
@@ -151,6 +154,7 @@ public class DiscordBot extends ListenerAdapter implements DiscordHandler {
             }
         });
     }
+
     @Override
     public void onConnection(@NotNull Player player, String type) {
         CompletableFuture.runAsync(() -> {

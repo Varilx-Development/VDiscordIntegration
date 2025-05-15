@@ -19,6 +19,8 @@ public class LinkedUser {
 
     @MongoId
     @Id
+    UUID _id;
+
     Long discordId;
 
     UUID uuid;
