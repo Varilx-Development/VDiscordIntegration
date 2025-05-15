@@ -5,6 +5,7 @@ import de.varilx.BaseSpigotAPI;
 import de.varilx.configuration.VaxConfiguration;
 import de.varilx.configuration.file.YamlConfiguration;
 import de.varilx.database.Service;
+import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.discord.DiscordBot;
 import de.varilx.discordIntegration.commands.DiscordCommand;
 import de.varilx.discordIntegration.discord.DiscordHandler;
@@ -40,6 +41,8 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+
         new BaseSpigotAPI(this, 24308).enable();
 
         Service service = Service.load(BaseAPI.get().getDatabaseConfiguration(), getClassLoader());

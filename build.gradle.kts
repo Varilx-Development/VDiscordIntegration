@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.1")
 
     // Base API
-    implementation("de.varilx:base-api:1.1.0")
+    implementation("de.varilx:base-api:1.1.1")
 
     // JDA
     implementation("net.dv8tion:JDA:5.2.2")
@@ -49,7 +49,7 @@ tasks.processResources {
     val props = mapOf("version" to version)
     inputs.properties(props)
     filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
+    filesMatching("paper-plugin.yml") {
         expand(props)
     }
 }
@@ -98,8 +98,5 @@ tasks.named("publishGprPublicationToReposiliteRepository") {
 tasks {
     runServer {
         minecraftVersion("1.21.4")
-        downloadPlugins {
-            url("https://download.luckperms.net/1568/bukkit/loader/LuckPerms-Bukkit-5.4.151.jar")
-        }
     }
 }
