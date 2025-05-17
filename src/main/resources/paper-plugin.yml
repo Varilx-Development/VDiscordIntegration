@@ -1,0 +1,13 @@
+name: VDiscordIntegration
+version: "${version}"
+main: de.varilx.discordIntegration.VDiscordIntegration
+api-version: '1.21'
+authors: [ Dario ]
+description: A DiscordChatbridge, discord -> mc, mc -> discord
+#loader: de.varilx.discordIntegration.Loader
+dependencies:
+  server:
+    LuckPerms:
+      required: false
+      load: BEFORE
+      join-classpath: true

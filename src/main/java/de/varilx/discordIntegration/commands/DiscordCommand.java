@@ -2,7 +2,6 @@ package de.varilx.discordIntegration.commands;
 
 import com.mojang.brigadier.Command;
 import de.varilx.BaseAPI;
-import de.varilx.configuration.VaxConfiguration;
 import de.varilx.database.Service;
 import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.entity.LinkCode;
@@ -22,6 +21,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
+@SuppressWarnings("UnstableApiUsage")
 public class DiscordCommand {
 
     public DiscordCommand(JavaPlugin plugin, Service database) {
