@@ -40,13 +40,11 @@ V-Discord Integration is a powerful plugin that creates a seamless chat bridge b
 
 The plugin is highly configurable. Here's a quick overview of the main sections:
 
-1. **Database**: Choose between MongoDB, MySQL, or SQLite
+1. **Database**: Choose between *SQLite, or MySQL*
 2. **Chat Bridge**: Set up BOT or WEBHOOK mode
 3. **Discord Linking**: Enable/disable account linking
 4. **Custom Messages**: Customize all plugin messages
 5. **Permissions**: Manage user permissions
-
-For detailed configuration options, check the [Wiki](https://github.com/Varilx-Development/VDiscordIntegration/wiki) (coming soon).
 
 ## 📚 Example Configurations
 
