@@ -41,7 +41,7 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+        Thread.currentThread().setContextClassLoader(getClassLoader());
 
         new BaseSpigotAPI(this, 24308).enable();
 
@@ -74,6 +74,8 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.manager.manageLifecyle("shutdown");
+        if (this.manager != null) {
+            this.manager.manageLifecyle("shutdown");
+        }
     }
 }
