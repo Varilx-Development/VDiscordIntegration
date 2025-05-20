@@ -4,6 +4,7 @@
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Varilx-Development/VDiscordIntegration/build.yml?branch=main)
 ![Release](https://img.shields.io/github/v/release/Varilx-Development/VDiscordIntegration)
+
 [![Available on Modrinth](https://raw.githubusercontent.com/vLuckyyy/badges/main/avaiable-on-modrinth.svg)](https://modrinth.com/plugin/vdiscord-intergration)
 
 </div>
