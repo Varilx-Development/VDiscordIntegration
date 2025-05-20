@@ -114,6 +114,8 @@ commands:
       linked: "You have been connected to the account <name>"
       code-sent: "<prefix>To link your discord account, send the following code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
 ```
+</details>
+
 ## 🔧 Permissions
 ```discord.link```: Allows users to link their Discord and Minecraft accounts
 
