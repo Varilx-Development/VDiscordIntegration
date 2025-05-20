@@ -1,155 +1,109 @@
-![V-Discord-Intergration](https://cdn.modrinth.com/data/cached_images/6eddb7b31cf0eeed5156ae4c6ac961da2f02aa7a_0.webp)
-![Discord](https://img.shields.io/discord/1322873747535040512)
+![V-Discord-Integration](https://cdn.varilx.de/raw/micMsI.png)
+
+<div align="center">
+
 ![Build Status](https://img.shields.io/github/actions/workflow/status/Varilx-Development/VDiscordIntegration/build.yml?branch=main)
 ![Release](https://img.shields.io/github/v/release/Varilx-Development/VDiscordIntegration)
-<p align="center">
-    <a href="https://modrinth.com/plugin/vdiscord-intergration">
-        <img src="https://raw.githubusercontent.com/vLuckyyy/badges/main/avaiable-on-modrinth.svg" alt="Available on Modrinth" />
-    </a>
-</p>
+[![Available on Modrinth](https://raw.githubusercontent.com/vLuckyyy/badges/main/avaiable-on-modrinth.svg)](https://modrinth.com/plugin/vdiscord-intergration)
 
-# V-Discord Intergration | Simple Discord Chatbridge
+</div>
 
-A discord chat bridge between minecraft and discord.
+# V-Discord Integration | Simple Discord Chatbridge
 
----
+V-Discord Integration is a powerful plugin that creates a seamless chat bridge between Minecraft and Discord. Enhance your server's communication and keep your community connected across platforms!
 
-## Preview
+## 🌟 Features
 
-![preview_ingame](https://github.com/user-attachments/assets/29662231-e8b8-4e93-a178-73dbf3b7d3ed)
-![preview_discord](https://github.com/user-attachments/assets/5aace62e-ecb9-429c-80fa-365d652d2496)
+- **Chat Bridge**: Real-time message syncing between Minecraft and Discord
+- **Flexible Configuration**: Choose between BOT and WEBHOOK modes
+- **Account Linking**: Optional Discord-Minecraft account linking
+- **Custom Messages**: Fully customizable messages using MiniMessage format
+- **Role Sync**: Synchronize Minecraft roles with Discord roles
+- **Multi-language Support**: Currently supports `en` and `de`
 
+## 📸 Preview
 
-## Configuration Overview
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+  <img src="https://github.com/user-attachments/assets/29662231-e8b8-4e93-a178-73dbf3b7d3ed" alt="In-game Preview" style="width: 45%; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <img src="https://github.com/user-attachments/assets/5aace62e-ecb9-429c-80fa-365d652d2496" alt="Discord Preview" style="width: 45%; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+</div>
 
-### 1. **Database**
-Define the database type and connection details. The plugin supports:
-- **MongoDB**: Specify a connection string and database name.
-- **SQL**: Provide a JDBC connection string. (No username/password is required for SQLite.)
+## 🚀 Quick Start
 
-### 2. **Chat Bridge**
-Select the bridge type:
-- **BOT**: Requires a Discord bot token, guild ID, and channel ID.
-- **WEBHOOK**: Requires a webhook URL.
+1. Download the plugin from [Modrinth](https://modrinth.com/plugin/vdiscord-intergration)
+2. Place the JAR file in your server's `plugins` folder
+3. Start your server to generate the configuration files
+4. Configure the `config.yml` file (see Configuration section)
+5. Restart your server
 
-### 3. **Discord Linking**
-Enable or disable account linking. When enabled, you can enforce linking for chat participation and assign roles or execute commands upon successful linking.
+## ⚙️ Configuration
 
-### 4. **Custom Messages**
-Customize messages for server startup, player join/quit, and Discord chat using the MiniMessage format.
-We currently support: `de` and `en`
+The plugin is highly configurable. Here's a quick overview of the main sections:
 
-### 5. **Commands**
-Configure responses for commands like `/discord link` and `/discord reload`.
+1. **Database**: Choose between MongoDB, MySQL, or SQLite
+2. **Chat Bridge**: Set up BOT or WEBHOOK mode
+3. **Discord Linking**: Enable/disable account linking
+4. **Custom Messages**: Customize all plugin messages
+5. **Permissions**: Manage user permissions
 
-### 6. **Permissions**
-`discord.link`
+For detailed configuration options, check the [Wiki](https://github.com/Varilx-Development/VDiscordIntegration/wiki) (coming soon).
 
-Allows the user to link their discord account with their minecraft account.
+## 📚 Example Configurations
 
-
-`discord.reload`
-
-Allows the user to reload configurations.
-
----
-
-## Setup Instructions
-
-1. Download and install the plugin on your Minecraft server.
-2. Configure the `config.yml` file with your preferred settings:
-    - Set the database type and connection details.
-    - Configure the chat bridge (BOT or WEBHOOK).
-    - Enable and customize account linking if needed.
-    - Define custom messages using MiniMessage.
-3. Restart the server to apply the changes.
-
----
-
-## Example config
+<details>
+<summary>Click to view example config.yml</summary>
 
 ```yaml
 language: "en"
 
 chatbridge:
-   type: BOT # Options: BOT (mc -> discord, discord -> mc), WEBHOOK (mc -> discord)
-
-   # This is only necessary if you picked: WEBHOOK
+   type: BOT
    webhook:
       url: "webhook_url"
-      avatar: "some_avatar_url" # Not necessary
-      name: "ChatBridge" # Not necessary
-
-   # This is only necessary if you picked: BOT
-   guild: 1322873747535040512 # The Guild id
-   channel: 1323049958911381515 # Channel id of the synced chat
+      avatar: "some_avatar_url"
+      name: "ChatBridge"
+   guild: 1322873747535040512
+   channel: 1323049958911381515
    token: "discord_bot_token"
 
-
-discord-link: # Only possbile if type is BOT
+discord-link:
    enabled: true
-   enforce: false # If set to true, not linked users won't be able to send messages in the discord chat
-   gets-roles: # These roles will be added to the discord user, when they link their discord account
+   enforce: false
+   gets-roles:
       - 1323067372214419526
-   commands: # These will be executed when they link
+   commands:
       - "lp user <name> parent set linked"
 
-# Only works if LuckPerms is on the server
-
-
 luckperms:
-   prefix: true # Displays the prefix of the current user in the <name>, of a join, quit and message (e.g. <group> | <name>)
+   prefix: true
 
-# This will give discord users every rank they have ingame also in the discord
 role-sync:
    enabled: true
-   delay: 30000 # Every 30 seconds
-   roles: # Makes links between "minecraft_role":"discord_role_id"
+   delay: 30000
+   roles:
       admin: 1323313717336608808
-
 ```
-
----
-
-## Example Message Configuration
+</details> <details> <summary>Click to view example messages.yml</summary>
 
 ```yaml
-
-# Using Minimessage https://docs.advntr.dev/minimessage/format.html
-
-prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> " # This prefix can be used anywhere as "<prefix>"
+Apply
+prefix: "<b><gradient:#08FB22:#BBFDAD>[VDiscord]</gradient></b><reset><!i><gray> "
 startup: "<prefix>Discord Integration has started up!"
 
 chatbridge:
    join:
       enabled: true
       color: "#00FF00"
-      message: ""
       title: "<player> has joined the game"
-      name: "Chatbridge" # The name of the webhook sender defaults to config.yml "chatbridge.webhook.name"
-      avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
    quit:
       enable: true
       color: "#FF0000"
-      message: ""
       title: "<player> has left the game"
-      name: "Chatbridge" # defaults to config.yml "chatbridge.webhook.name"
-      avatar: "some_custom_avatar_url" # defaults to config.yml "chatbridge.webhook.avatar"
-   startup:
-      enabled: true
-      color: "#00FF00"
-      message: "The Server has started"
-      title: "Startup"
-   shutdown:
-      enabled: true
-      color: "#FF0000"
-      message: "The Server has stopped"
-      title: "Shutdown"
-   ingame-message: # Ingame -> Discord
+   ingame-message:
       enabled: true
       message: "<message>"
-      name: "<name>"  # You can also use <name>, but thats only returns the ign
-   discord-message: # Discord -> Ingame, only with Bot available
+      name: "<name>"
+   discord-message:
       enabled: true
       message: "<dark_gray>[<blue><b>Discord</b></blue>] <gray><discordname> <dark_gray>»  <yellow><message>"
 
@@ -158,44 +112,14 @@ commands:
       reloaded: "<prefix>The config has been reloaded"
    link:
       linked: "You have been connected to the account <name>"
-      already-linked: "<prefix><red>You are already linked, you cant link again"
-      disabled: "<prefix><red>This feature is disabled"
-      format: "<prefix>This command doesnt exists, use the /discord link command"
       code-sent: "<prefix>To link your discord account, send the following code to the DiscordBot: <click:copy_to_clipboard:<code>><hover:show_text:Click here to copy><yellow><code></yellow> (click to copy)"
-
 ```
+## 🔧 Permissions
+```discord.link```: Allows users to link their Discord and Minecraft accounts
 
----
-
-## Example Database Configuration
-
-```yaml
-type: Sqlite # Avaiable types: mongo, mysql, sqlite
+```discord.reload```: Allows users to reload the plugin configuration
 
 
-# MONGO
-Mongo:
-  connection-string: "mongodb://<username>:<password>@<host>:<port>/"
-  database: "db"
+## 🆘 Support
 
-
-# SQL
-SQL:
-  connection-string: "jdbc:sqlite:plugins/VDiscordIntegration/database.db"
-  username: "username" # Not required for sqlite
-  password: "password" # Not required for sqlite
-```
-
-
----
-
-## Notes
-
-- The MiniMessage format is highly flexible for styling and formatting messages. Refer to the [MiniMessage documentation](https://docs.advntr.dev/minimessage/format.html) for more details.
-- Ensure your Discord bot token and IDs are correctly configured for the BOT mode.
-- SQLite is the simplest database option as it doesn’t require additional setup.
-
-# Support?
-<a href="https://discord.gg/ZPyb9g6Gs4">
-    <img src="https://github.com/user-attachments/assets/e2c942ae-d79a-4606-b4b0-240fd92c9a90" alt="Join our Discord for help" width="400">
-</a>
+<a href="https://discord.gg/ZPyb9g6Gs4"> <img src="https://cdn.varilx.de/raw/Zm9inS.png" alt="Join our Discord for help" width="300"> </a>
