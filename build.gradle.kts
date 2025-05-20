@@ -23,18 +23,17 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${project.property("paper_version")}")
 
     // Lombok
-    implementation("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
     compileOnly("org.projectlombok:lombok:1.18.38")
 
     // JetBrains Annotations
-    implementation("org.jetbrains:annotations:26.0.2")
+    compileOnly("org.jetbrains:annotations:26.0.2")
 
     // Base API
-    implementation("de.varilx:base-api:1.1.1")
+    compileOnly("de.varilx:base-api:1.3.3")
 
     // JDA
-    implementation("net.dv8tion:JDA:5.5.1")
+    compileOnly("net.dv8tion:JDA:5.5.1")
 
     // LuckPerms
     compileOnly("net.luckperms:api:5.4")
@@ -97,6 +96,6 @@ tasks.named("publishGprPublicationToReposiliteRepository") {
 
 tasks {
     runServer {
-        minecraftVersion("1.21.4")
+        minecraftVersion("1.21.5")
     }
 }
