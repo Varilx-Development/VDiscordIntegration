@@ -1,6 +1,5 @@
 package de.varilx.discordIntegration.entity;
 
-import de.varilx.database.id.MongoId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -17,7 +16,6 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LinkCode {
 
-    @MongoId
     @Id
     UUID _id;
 

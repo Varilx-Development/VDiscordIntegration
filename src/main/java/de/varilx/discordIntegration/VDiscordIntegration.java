@@ -3,9 +3,7 @@ package de.varilx.discordIntegration;
 import de.varilx.BaseAPI;
 import de.varilx.BaseSpigotAPI;
 import de.varilx.configuration.VaxConfiguration;
-import de.varilx.configuration.file.YamlConfiguration;
 import de.varilx.database.Service;
-import de.varilx.database.repository.Repository;
 import de.varilx.discordIntegration.discord.DiscordBot;
 import de.varilx.discordIntegration.commands.DiscordCommand;
 import de.varilx.discordIntegration.discord.DiscordHandler;
@@ -15,15 +13,11 @@ import de.varilx.discordIntegration.entity.LinkedUser;
 import de.varilx.discordIntegration.listener.MinecraftListener;
 import de.varilx.discordIntegration.luckperms.LuckPermsService;
 import de.varilx.discordIntegration.luckperms.LuckPermsServiceAPI;
-import de.varilx.discordIntegration.webhook.DiscordWebhook;
 import de.varilx.utils.language.LanguageUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.awt.*;
-import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -35,13 +29,8 @@ public final class VDiscordIntegration extends JavaPlugin {
     DiscordHandler manager;
 
     @Override
-    public void onLoad() {
-
-    }
-
-    @Override
     public void onEnable() {
-        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+        Thread.currentThread().setContextClassLoader(getClassLoader());
 
         new BaseSpigotAPI(this, 24308).enable();
 
@@ -74,6 +63,8 @@ public final class VDiscordIntegration extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.manager.manageLifecyle("shutdown");
+        if (this.manager != null) {
+            this.manager.manageLifecyle("shutdown");
+        }
     }
 }
