@@ -47,7 +47,7 @@ public final class VDiscordIntegration extends JavaPlugin {
 
         Service service = Service.load(BaseAPI.get().getDatabaseConfiguration(), getClassLoader());
 
-        service.create(LinkedUser.class, Long.class);
+        service.create(LinkedUser.class, UUID.class);
         service.create(LinkCode.class, UUID.class);
 
         VaxConfiguration config = BaseAPI.get().getConfiguration();

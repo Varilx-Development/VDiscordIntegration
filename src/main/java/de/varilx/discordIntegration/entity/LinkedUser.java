@@ -17,6 +17,8 @@ import java.util.UUID;
 public class LinkedUser {
 
     @Id
+    UUID _id;
+
     Long discordId;
 
     UUID uuid;

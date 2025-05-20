@@ -10,18 +10,20 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LinkCode {
 
     @Id
-    UUID link;
+    UUID _id;
+
+    UUID player;
 
     Long code;
 
     String username;
-
 
     Long timestamp;
 
