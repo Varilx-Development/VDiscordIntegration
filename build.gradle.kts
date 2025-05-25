@@ -36,7 +36,7 @@ dependencies {
     compileOnly("net.dv8tion:JDA:5.5.1")
 
     // LuckPerms
-    compileOnly("net.luckperms:api:5.4")
+    compileOnly("net.luckperms:api:5.5")
 }
 
 tasks.withType<JavaCompile>().configureEach {
