@@ -33,7 +33,7 @@ dependencies {
     compileOnly("de.varilx:base-api:1.3.3")
 
     // JDA
-    compileOnly("net.dv8tion:JDA:5.5.1")
+    compileOnly("net.dv8tion:JDA:5.6.1")
 
     // LuckPerms
     compileOnly("net.luckperms:api:5.4")
