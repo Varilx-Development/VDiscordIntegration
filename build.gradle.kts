@@ -23,8 +23,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${project.property("paper_version")}")
 
     // Lombok
-    annotationProcessor("org.projectlombok:lombok:1.18.38")
-    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.48")
+    compileOnly("org.projectlombok:lombok:1.18.48")
 
     // JetBrains Annotations
     compileOnly("org.jetbrains:annotations:26.0.2")
